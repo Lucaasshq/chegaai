@@ -3,7 +3,7 @@
  * Este software é proprietário da ChegaAI.
  * A cópia, distribuição ou uso não autorizado é estritamente proibido.
  */
-package br.com.chegaai.chegaai_backend.entity;
+package br.com.chegaai.chegaai_backend.entity.abstracts;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 
 @MappedSuperclass // indica que a tabela é herdada e não é uma entidade
@@ -39,11 +40,22 @@ public abstract class IdModel {
     @PrePersist
     public void prePersist(){
         this.dataCriacao = LocalDateTime.now();
-        this.ativo = false;
     }
 
     @PreUpdate
     public void preUpdate(){
         this.dataAtualizacao = LocalDateTime.now();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        IdModel idModel = (IdModel) o;
+        return Objects.equals(id, idModel.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

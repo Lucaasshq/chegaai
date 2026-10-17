@@ -5,6 +5,7 @@
  */
 package br.com.chegaai.chegaai_backend.entity;
 
+import br.com.chegaai.chegaai_backend.entity.abstracts.IdModel;
 import br.com.chegaai.chegaai_backend.entity.enums.Papel;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.AssertTrue;
