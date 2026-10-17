@@ -1,5 +1,6 @@
 plugins {
 	java
+	pmd // Analise estatica de codigo para seguir boas praticas de programacao
 	id("org.springframework.boot") version "4.1.1"
 	id("io.spring.dependency-management") version "1.1.7"
 }
@@ -11,6 +12,19 @@ java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(21)
 	}
+}
+
+pmd {
+	// Define a versão do PMD
+	toolVersion = "7.0.0"
+	isConsoleOutput = true
+	// Ativar e desativar regras específicas
+	isIgnoreFailures = true
+	ruleSets = listOf(
+		"category/java/errorprone.xml",
+		"category/java/bestpractices.xml"
+		// "category/java/codestyle.xml"
+	)
 }
 
 repositories {
@@ -42,4 +56,5 @@ dependencies {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+
 }
