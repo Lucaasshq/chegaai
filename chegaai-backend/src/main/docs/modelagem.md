@@ -10,19 +10,15 @@ config:
   layout: elk
 ---
 erDiagram
-    ID_MODEL ||--o{ RESTAURANTE : "Herança"
-    ID_MODEL ||--o{ CARDAPIO : "Herança"
-    ID_MODEL ||--o{ CATEGORIA : "Herança"
-    ID_MODEL ||--o{ PRODUTOS : "Herança"
-    ID_MODEL ||--o{ FORMA_DE_PAGAMENTO : "Herança"
-    ID_MODEL ||--o{ ITEM_PEDIDO : "Herança"
-
-    RESTAURANTE ||--o{ USUARIO : "1 : N"
+    RESTAURANTE ||--o{ USUARIO : "1  : N"
     RESTAURANTE ||--o{ CARDAPIO : "1 : N"
     RESTAURANTE ||--o{ CATEGORIA : "1 : N"
     RESTAURANTE ||--o{ PRODUTOS : "1 : N"
     RESTAURANTE ||--o{ FORMA_DE_PAGAMENTO : "1 : N"
     RESTAURANTE ||--o{ PEDIDO : "1 : N"
+
+    PRODUTOS ||--o{ COMPLEMENTO_GRUPO : "1 : N"
+    COMPLEMENTO_GRUPO ||--o{ COMPLEMENTO_ITEM : "1 : N"
 
     CARDAPIO ||--o{ CATEGORIA : "1 : N"
     CATEGORIA ||--o{ PRODUTOS : "1 : N"
@@ -31,10 +27,15 @@ erDiagram
     CLIENTE ||--o{ ENDERECO : "1 : N"
     CLIENTE ||--o{ PEDIDO : "Associação (snapshot)"
 
+%% Registro dos Adicionais escolhidos no Pedido
+    ITEM_PEDIDO ||--o{ ITEM_PEDIDO_COMPLEMENTO : "1 : N"
+    COMPLEMENTO_ITEM ||--o{ ITEM_PEDIDO_COMPLEMENTO : "1 : N"
+
     FORMA_DE_PAGAMENTO ||--o{ PEDIDO : "1 : N"
     PEDIDO ||--o{ ITEM_PEDIDO : "1 : N"
 
-    ID_MODEL {
+
+    ID_MODEL_ABSTRACT {
         bigint id PK
         timestamp dataCriacao
         boolean Ativo
@@ -117,6 +118,41 @@ erDiagram
         string status_pagamento
     }
 
+    COMPLEMENTO_GRUPO {
+        bigint id PK
+        bigint produto_id FK
+        string nome
+        int min_escolhas
+        int max_escolhas
+    }
+
+    COMPLEMENTO_ITEM {
+        bigint id PK
+        bigint grupo_id FK
+        string nome
+        decimal preco_adicional
+        boolean disponivel
+    }
+
+    ITEM_PEDIDO_COMPLEMENTO {
+        bigint id PK
+        bigint item_pedido_id FK
+        bigint complemento_item_id FK
+        string nome_complemento_congelado
+        decimal preco_adicional_congelado
+        int quantidade
+    }
+
+    ITEM_PEDIDO {
+        bigint id PK
+        bigint produto_id FK
+        bigint pedido_id FK
+        int quantidade
+        string nome_produto_congelado
+        decimal preco_unitario_congelado
+        string observacao_item
+    }
+
     PEDIDO {
         bigint id PK
         bigint restaurant_id FK
@@ -135,13 +171,4 @@ erDiagram
         timestamp data_pedido
     }
 
-    ITEM_PEDIDO {
-        bigint id PK
-        bigint produto_id FK
-        bigint pedido_id FK
-        int quantidade
-        string nome_produto_congelado
-        decimal preco_unitario_congelado
-        string observacao_item
-    }
 ```
