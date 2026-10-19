@@ -13,6 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "item_pedido")
@@ -42,4 +43,8 @@ public class ItemPedido extends IdModel {
 
     @Column(name = "observacao_item", length = 255)
     private String observacaoItem;
+
+    // Mapeamento bidirecional: avisa ao JPA que os complementos são mapeados pelo atributo 'itemPedido' em ItemPedidoComplemento
+    @OneToMany(mappedBy = "itemPedido", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemPedidoComplemento> complementos;
 }

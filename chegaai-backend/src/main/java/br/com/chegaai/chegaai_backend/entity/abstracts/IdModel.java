@@ -9,12 +9,21 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 
 @MappedSuperclass // indica que a tabela é herdada e não é uma entidade
+/**
+ * Classe base para todas as entidades do sistema.
+ *
+ * @SQLRestriction("data_exclusao IS NULL") garante que todas as consultas (SELECT)
+ * ignorem automaticamente os registros marcados como excluídos logicamente (soft delete),
+ * mantendo o histórico intacto no banco de dados sem os exibir nas listagens comuns.
+ */
+@SQLRestriction("data_exclusao IS NULL")
 @Getter
 @Setter
 public abstract class IdModel {
