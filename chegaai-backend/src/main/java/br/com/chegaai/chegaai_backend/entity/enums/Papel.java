@@ -1,18 +1,24 @@
 package br.com.chegaai.chegaai_backend.entity.enums;
 
 import lombok.Getter;
+import org.springframework.security.core.GrantedAuthority;
 
 @Getter
-public enum Papel {
-    ROLE_GLOBAL_ADMIN("Role_global_admin"),
-    ROLE_DONO_RESTAURANTE("Role_dono_restaurante"),
-    ROLE_GERENTE_RESTAURANTE("Role_gerente_restaurante"),
-    ROLE_COZINHA_RESTAURANTE("Role_cozinha_restaurante"),
-    ROLE_FUNCIONARIO_RESTAURANTE("Role_funcionario_restaurante");
+public enum Papel implements GrantedAuthority {
+    ROLE_GLOBAL_ADMIN("Admin Global"),
+    ROLE_DONO_RESTAURANTE("Dono do Restaurante"),
+    ROLE_GERENTE_RESTAURANTE("Gerente"),
+    ROLE_COZINHA_RESTAURANTE("Cozinha / KDS"),
+    ROLE_FUNCIONARIO_RESTAURANTE("Funcionario Operacional"),;
 
-    private final String autoridade;
+    private final String descricao;
 
-    Papel(String autoridade) {
-        this.autoridade = autoridade;
+    Papel(String descricao) {
+        this.descricao = descricao;
+    }
+
+    @Override
+    public String getAuthority() {
+        return this.name(); // retorna o nome da constante do enum como autoridade
     }
 }
