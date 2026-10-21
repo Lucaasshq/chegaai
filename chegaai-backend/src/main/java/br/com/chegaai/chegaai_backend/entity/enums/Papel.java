@@ -9,7 +9,8 @@ public enum Papel implements GrantedAuthority {
     ROLE_DONO_RESTAURANTE("Dono do Restaurante"),
     ROLE_GERENTE_RESTAURANTE("Gerente"),
     ROLE_COZINHA_RESTAURANTE("Cozinha / KDS"),
-    ROLE_FUNCIONARIO_RESTAURANTE("Funcionario Operacional"),;
+    ROLE_FUNCIONARIO_RESTAURANTE("Funcionario Operacional"),
+    ROLE_CLIENTE("Cliente");
 
     private final String descricao;
 

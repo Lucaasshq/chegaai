@@ -32,7 +32,7 @@ public class Usuario extends IdModel implements UserDetails {
 
     @Column(name = "nome", nullable = false, length = 100)
     @NotBlank(message = "O nome é obrigatório")
-    private String nome;
+    private String nomeCompleto;
 
     @Column(name = "email", nullable = false, unique = true, length = 150)
     @NotBlank(message = "O e-mail é obrigatório")
@@ -47,28 +47,28 @@ public class Usuario extends IdModel implements UserDetails {
     @Column(name = "papel", nullable = false, length = 30)
     private Papel papel;
 
-    /**
-     * Validação automática: Se não for ADMIN_GLOBAL, o restaurante_id é obrigatório.
-     */
-    @AssertTrue(message = "O restaurante é obrigatório para usuários que não são ADMIN_GLOBAL")
-    public boolean isRestauranteObrigatorioConformePapel() {
-       if (this.papel == Papel.ROLE_GLOBAL_ADMIN){
-           return true;
-       }
-       return this.restaurante != null;
-    }
-
-    /**
-     * Garantia de segurança no nível de persistência do Banco de Dados
-     */
-
-    @PrePersist
-    @PreUpdate
-    private void validarIntegridadeRestaurante(){
-        if (this.papel != Papel.ROLE_GLOBAL_ADMIN && this.restaurante == null) {
-            throw new IllegalStateException("O restaurante é obrigatório para usuários que não são ADMIN_GLOBAL");
-        }
-    }
+//    /**
+//     * Validação automática: Se não for ADMIN_GLOBAL, o restaurante_id é obrigatório.
+//     */
+//    @AssertTrue(message = "O restaurante é obrigatório para usuários que não são ADMIN_GLOBAL")
+//    public boolean isRestauranteObrigatorioConformePapel() {
+//       if (this.papel == Papel.ROLE_GLOBAL_ADMIN){
+//           return true;
+//       }
+//       return this.restaurante != null;
+//    }
+//
+//    /**
+//     * Garantia de segurança no nível de persistência do Banco de Dados
+//     */
+//
+//    @PrePersist
+//    @PreUpdate
+//    private void validarIntegridadeRestaurante(){
+//        if (this.papel != Papel.ROLE_GLOBAL_ADMIN && this.restaurante == null) {
+//            throw new IllegalStateException("O restaurante é obrigatório para usuários que não são ADMIN_GLOBAL");
+//        }
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
