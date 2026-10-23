@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-public class AdminSeeder {
+public class AdminPopular {
 
     @Bean
     CommandLineRunner criarAdminPadrao(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
@@ -32,7 +32,6 @@ public class AdminSeeder {
                 adminMaster.setSenha(passwordEncoder.encode("Admin@123456"));
                 adminMaster.setPapel(Papel.ROLE_GLOBAL_ADMIN);
                 adminMaster.setRestaurante(null); // Admin global não tem restaurante
-
                 usuarioRepository.save(adminMaster);
                 System.out.println(">> [SECURITY] Usuário ADMIN Global padrão criado com sucesso: admin@chegaai.com / Admin@123456");
             }
