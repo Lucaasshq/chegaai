@@ -19,8 +19,8 @@ O **ChegaAI** é um backend para um SaaS de delivery multi-tenant, desenvolvido 
     * `ROLE_GERENTE_RESTAURANTE`: Gerente/Caixa (opera o caixa, aceita/cancela pedidos e despacha entregadores).
     * `ROLE_COZINHA_RESTAURANTE`: Cozinha/KDS (visualiza e altera status no Kanban).
 * **Requisitos Funcionais (RF)**:
-    * **RF01**: O sistema deve permitir o cadastro e aprovação de novos restaurantes pelo administrador global.
-    * **RF02**: O sistema deve autenticar usuários com base em seus perfis (`Roles`) e isolar o acesso às funcionalidades da respectiva loja.
+    * **RF01**: O sistema deve permitir o cadastro e aprovação de novos restaurantes pelo administrador global. ✅​
+    * **RF02**: O sistema deve autenticar usuários com base em seus perfis (`Roles`) e isolar o acesso às funcionalidades da respectiva loja.✅​
 * **Requisitos Não Funcionais (RNF)**:
     * **RNF01**: As senhas dos usuários devem ser armazenadas utilizando criptografia forte (BCrypt).
     * **RNF02**: O isolamento multi-tenant deve garantir que dados de um restaurante nunca sejam acessados por usuários de outro.
