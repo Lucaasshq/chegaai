@@ -6,6 +6,7 @@
 package br.com.chegaai.chegaai_backend.entity;
 
 import br.com.chegaai.chegaai_backend.entity.abstracts.IdModel;
+import br.com.chegaai.chegaai_backend.web.controller.dto.RestauranteDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -58,5 +59,19 @@ public class Restaurante extends IdModel {
 
     @Column(name = "subdominio", unique = true, length = 50)
     private String subdominio;
+
+    public void atualizarInformacoes(RestauranteDTO dto){
+        this.nome = dto.nome();
+        this.cnpj = dto.cnpj();
+        this.email = dto.email();
+        this.telefone = dto.telefone();
+        this.logoUrl = dto.logoUrl();
+        this.bannerUrl = dto.bannerUrl();
+        this.horarioAbertura = dto.horarioAbertura();
+        this.horarioFechamento = dto.horarioFechamento();
+        this.tempoMedioPreparoMinutos = dto.tempoMedioPreparoMinutos();
+        this.pedidoMinimo = dto.pedidoMinimo();
+        this.subdominio = dto.subdominio();
+    }
 
 }
