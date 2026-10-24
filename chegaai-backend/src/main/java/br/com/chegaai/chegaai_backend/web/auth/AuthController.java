@@ -4,11 +4,11 @@
  * A cópia, distribuição ou uso não autorizado é estritamente proibido.
  */
 
-package br.com.chegaai.chegaai_backend.web.controller;
+package br.com.chegaai.chegaai_backend.web.auth;
 
-import br.com.chegaai.chegaai_backend.web.controller.dto.LoginRequestDTO;
-import br.com.chegaai.chegaai_backend.web.controller.dto.RegisterRequestDTO;
-import br.com.chegaai.chegaai_backend.web.controller.dto.TokenResponseDTO;
+import br.com.chegaai.chegaai_backend.web.dto.LoginRequestDTO;
+import br.com.chegaai.chegaai_backend.web.dto.RegisterRequestDTO;
+import br.com.chegaai.chegaai_backend.web.dto.TokenResponseDTO;
 import br.com.chegaai.chegaai_backend.entity.Usuario;
 import br.com.chegaai.chegaai_backend.repository.RestauranteRepository;
 import br.com.chegaai.chegaai_backend.repository.UsuarioRepository;

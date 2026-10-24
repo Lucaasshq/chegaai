@@ -7,10 +7,13 @@
 package br.com.chegaai.chegaai_backend.web.controller;
 
 import br.com.chegaai.chegaai_backend.entity.Restaurante;
+import br.com.chegaai.chegaai_backend.entity.Usuario;
 import br.com.chegaai.chegaai_backend.service.AdminRestauranteService;
 import br.com.chegaai.chegaai_backend.service.RestauranteService;
-import br.com.chegaai.chegaai_backend.web.controller.dto.RestauranteDTO;
-import br.com.chegaai.chegaai_backend.web.controller.dto.UsuarioDTO;
+import br.com.chegaai.chegaai_backend.web.dto.RestauranteRequestDTO;
+import br.com.chegaai.chegaai_backend.web.dto.RestauranteResponseDTO;
+import br.com.chegaai.chegaai_backend.web.dto.UsuarioRequestDTO;
+import br.com.chegaai.chegaai_backend.web.dto.UsuarioResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -34,17 +37,17 @@ public class AdminRestauranteController {
     @Operation(summary = "Criar Restaurante", description = "Cria um novo restaurante no sistema. Requer permissão de administrador global.")
     @PreAuthorize("hasRole('ROLE_GLOBAL_ADMIN')")
     @PostMapping
-    public ResponseEntity<RestauranteDTO> criarRestaurante(@RequestBody @Valid RestauranteDTO dto){
-        RestauranteDTO restauranteDTO = restauranteService.criar(dto);
-        return ResponseEntity.status(201).body(restauranteDTO);
+    public ResponseEntity<RestauranteResponseDTO> criarRestaurante(@RequestBody @Valid RestauranteRequestDTO dto){
+        Restaurante restaurante = restauranteService.criar(dto);
+        return ResponseEntity.status(201).body(new RestauranteResponseDTO(restaurante));
     }
 
     @Operation(summary = "Criar Usuário Dono de Restaurante", description = "Cria um novo usuário dono de restaurante. Requer permissão de administrador global.")
     @PreAuthorize("hasRole('ROLE_GLOBAL_ADMIN')")
     @PostMapping("/usuario")
-    public ResponseEntity<UsuarioDTO> criarUsuarioDonoRestaurante(@RequestBody @Valid UsuarioDTO dto) {
-        UsuarioDTO usuario = adminRestauranteService.criarUsuarioDonoRestaurante(dto);
-        return ResponseEntity.status(201).body(usuario);
+    public ResponseEntity<UsuarioResponseDTO> criarUsuarioDonoRestaurante(@RequestBody @Valid UsuarioRequestDTO dto) {
+        Usuario usuario = adminRestauranteService.criarUsuarioDonoRestaurante(dto);
+        return ResponseEntity.status(201).body(new UsuarioResponseDTO(usuario));
     }
 
 

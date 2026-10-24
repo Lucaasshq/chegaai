@@ -1,10 +1,10 @@
-package br.com.chegaai.chegaai_backend.web.controller.dto;
+package br.com.chegaai.chegaai_backend.web.dto;
 
 import br.com.chegaai.chegaai_backend.entity.Usuario;
 import br.com.chegaai.chegaai_backend.entity.enums.Papel;
 import jakarta.validation.constraints.*;
 
-public record UsuarioDTO(
+public record UsuarioRequestDTO(
         @NotNull(message = "O ID do restaurante é obrigatório")
         Long restauranteId,
         @NotBlank(message = "O nome completo é obrigatório")
@@ -24,7 +24,7 @@ public record UsuarioDTO(
 
 ) {
 
-    public UsuarioDTO(Usuario usuario) {
+    public UsuarioRequestDTO(Usuario usuario) {
         this(
                 usuario.getRestaurante() != null ? usuario.getRestaurante().getId() : null,
                 usuario.getNomeCompleto(),
