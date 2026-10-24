@@ -8,7 +8,8 @@ package br.com.chegaai.chegaai_backend.web.controller;
 
 import br.com.chegaai.chegaai_backend.entity.Restaurante;
 import br.com.chegaai.chegaai_backend.service.RestauranteService;
-import br.com.chegaai.chegaai_backend.web.controller.dto.RestauranteDTO;
+import br.com.chegaai.chegaai_backend.web.dto.RestauranteRequestDTO;
+import br.com.chegaai.chegaai_backend.web.dto.RestauranteResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -33,9 +34,9 @@ public class RestauranteController {
     @Operation(summary = "Atualizar Restaurante")
     @PreAuthorize("hasRole('ROLE_GLOBAL_ADMIN') or hasRole('ROLE_DONO_RESTAURANTE')")
     @PutMapping("/{restauranteId}")
-    public ResponseEntity<RestauranteDTO> atualizarRestaurante(@PathVariable Long restauranteId, @RequestBody @Valid RestauranteDTO dto) throws AccessDeniedException {
-        RestauranteDTO restaurante = restauranteService.atualizar(restauranteId, dto);
-        return ResponseEntity.ok(restaurante);
+    public ResponseEntity<RestauranteRequestDTO> atualizarRestaurante(@PathVariable Long restauranteId, @RequestBody @Valid RestauranteRequestDTO dto) throws AccessDeniedException {
+        Restaurante restaurante = restauranteService.atualizar(restauranteId, dto);
+        return ResponseEntity.ok(new RestauranteRequestDTO(restaurante));
     }
 
 
@@ -50,9 +51,9 @@ public class RestauranteController {
     @Operation(summary = "Buscar Restaurante")
     @PreAuthorize("hasRole('ROLE_GLOBAL_ADMIN') or hasRole('ROLE_DONO_RESTAURANTE')")
     @GetMapping("/{restauranteId}")
-    public ResponseEntity<RestauranteDTO> buscar(@PathVariable Long restauranteId) throws AccessDeniedException {
-        RestauranteDTO restauranteDTO = restauranteService.buscarPorId(restauranteId);
-        return ResponseEntity.ok().body(restauranteDTO);
+    public ResponseEntity<RestauranteResponseDTO> buscar(@PathVariable Long restauranteId) throws AccessDeniedException {
+        Restaurante restaurante = restauranteService.buscarPorId(restauranteId);
+        return ResponseEntity.ok().body(new RestauranteResponseDTO(restaurante));
     }
 
 }

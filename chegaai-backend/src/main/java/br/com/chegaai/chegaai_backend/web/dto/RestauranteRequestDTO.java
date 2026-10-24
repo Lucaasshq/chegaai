@@ -1,16 +1,14 @@
-package br.com.chegaai.chegaai_backend.web.controller.dto;
+package br.com.chegaai.chegaai_backend.web.dto;
 
 import br.com.chegaai.chegaai_backend.entity.Restaurante;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.br.CNPJ;
 
 import java.math.BigDecimal;
 import java.time.LocalTime;
 
-public record RestauranteDTO(
+public record RestauranteRequestDTO(
         @NotBlank(message = "O nome do restaurante é obrigatório")
         String nome,
         @CNPJ(message = "CNPJ inválido")
@@ -31,7 +29,7 @@ public record RestauranteDTO(
         String subdominio
 ) {
 
-    public RestauranteDTO(Restaurante restaurante) {
+    public RestauranteRequestDTO(Restaurante restaurante) {
         this(
                 restaurante.getNome(),
                 restaurante.getCnpj(),

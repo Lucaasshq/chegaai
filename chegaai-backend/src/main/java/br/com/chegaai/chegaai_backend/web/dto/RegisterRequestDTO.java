@@ -1,4 +1,4 @@
-package br.com.chegaai.chegaai_backend.web.controller.dto;
+package br.com.chegaai.chegaai_backend.web.dto;
 
 import br.com.chegaai.chegaai_backend.entity.Usuario;
 import br.com.chegaai.chegaai_backend.entity.enums.Papel;

@@ -11,7 +11,7 @@ import br.com.chegaai.chegaai_backend.entity.Usuario;
 import br.com.chegaai.chegaai_backend.entity.enums.Papel;
 import br.com.chegaai.chegaai_backend.repository.RestauranteRepository;
 import br.com.chegaai.chegaai_backend.repository.UsuarioRepository;
-import br.com.chegaai.chegaai_backend.web.controller.dto.UsuarioDTO;
+import br.com.chegaai.chegaai_backend.web.dto.UsuarioRequestDTO;
 import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ public class AdminRestauranteService {
     }
 
     @Transactional
-    public UsuarioDTO criarUsuarioDonoRestaurante(UsuarioDTO dto) {
+    public Usuario criarUsuarioDonoRestaurante(UsuarioRequestDTO dto) {
         if (dto == null) {
             throw new IllegalArgumentException("O usuário não pode ser nulo.");
         }
@@ -48,6 +48,6 @@ public class AdminRestauranteService {
         usuario.setPapel(Papel.ROLE_DONO_RESTAURANTE);
         usuarioRepository.save(usuario);
 
-        return new UsuarioDTO(usuario);
+        return usuario;
     }
 }

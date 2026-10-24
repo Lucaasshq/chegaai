@@ -49,7 +49,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**", "/api/cardapio/**", "/api/produtos**", "/api/pedidos/publico/**").permitAll()
                         // endpoints de acesso restrito por papel
                         .requestMatchers("/api/cozinha/**").hasAnyAuthority(Papel.ROLE_COZINHA_RESTAURANTE.name(), Papel.ROLE_GERENTE_RESTAURANTE.name(), Papel.ROLE_DONO_RESTAURANTE.name())
-                        .requestMatchers("/api/gerencia/**").hasAnyAuthority(Papel.ROLE_GERENTE_RESTAURANTE.name(), Papel.ROLE_DONO_RESTAURANTE.name())
+                        .requestMatchers("/api/gerencia/**").hasAnyAuthority(Papel.ROLE_GERENTE_RESTAURANTE.name(), Papel.ROLE_DONO_RESTAURANTE.name(), Papel.ROLE_GLOBAL_ADMIN.name())
                         .requestMatchers("/api/admin/**").hasAnyAuthority(Papel.ROLE_GLOBAL_ADMIN.name())
                         .anyRequest().authenticated()
                 )

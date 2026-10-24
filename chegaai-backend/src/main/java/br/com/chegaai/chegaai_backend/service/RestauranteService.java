@@ -10,7 +10,7 @@ import br.com.chegaai.chegaai_backend.entity.Restaurante;
 import br.com.chegaai.chegaai_backend.repository.RestauranteRepository;
 import br.com.chegaai.chegaai_backend.repository.UsuarioRepository;
 import br.com.chegaai.chegaai_backend.utils.SecurityUtils;
-import br.com.chegaai.chegaai_backend.web.controller.dto.RestauranteDTO;
+import br.com.chegaai.chegaai_backend.web.dto.RestauranteRequestDTO;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -28,16 +28,15 @@ public class RestauranteService {
     }
 
     @Transactional
-    public RestauranteDTO criar(RestauranteDTO dto) {
+    public Restaurante criar(RestauranteRequestDTO dto) {
         if (dto == null) {
             throw new IllegalArgumentException("O restaurante não pode ser nulo.");
         }
-        Restaurante restauranteSalvo = restauranteRepository.save(dto.toEntity());
-        return new RestauranteDTO(restauranteSalvo);
+        return restauranteRepository.save(dto.toEntity());
     }
 
     @Transactional
-    public RestauranteDTO atualizar(Long id, RestauranteDTO dto) throws AccessDeniedException {
+    public Restaurante atualizar(Long id, RestauranteRequestDTO dto) throws AccessDeniedException {
         if (dto == null || id == null){
             throw new IllegalArgumentException("O restaurante ou ID não pode ser nulo.");
         }
@@ -49,8 +48,7 @@ public class RestauranteService {
 
         restaurante.atualizarInformacoes(dto);
 
-        Restaurante restauranteAtualizado = restauranteRepository.save(restaurante);
-        return new RestauranteDTO(restauranteAtualizado);
+        return restauranteRepository.save(restaurante);
     }
 
 
@@ -69,7 +67,7 @@ public class RestauranteService {
         restauranteRepository.save(restaurante);
     }
 
-    public RestauranteDTO buscarPorId(Long id) throws AccessDeniedException {
+    public Restaurante buscarPorId(Long id) throws AccessDeniedException {
         if (id == null){
             throw new IllegalArgumentException("O ID não pode ser nulo.");
         }
@@ -78,7 +76,7 @@ public class RestauranteService {
 
         Restaurante restaurante = restauranteRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Restaurante não encontrado."));
-        return new RestauranteDTO(restaurante);
+        return  restaurante;
     }
 
 

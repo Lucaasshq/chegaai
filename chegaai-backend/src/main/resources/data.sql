@@ -5,11 +5,12 @@ VALUES
     (2, 'Sabor Nordestino', '63756594000185', 'saborNordestino@gmail.com', '123456789', '', '', '10:00:00', '14:00:00', 60, 15.00, 'sabornordestino', true, NOW());
 
 -- 2. Inserção dos Usuários (com senha e data_criacao inclusas)
+-- senha Restaurante123@#$
 INSERT INTO usuario (nome, email, senha, papel, restaurante_id, ativo, data_criacao)
 VALUES
-    ('João Zé', 'JoaoZe@gmail.com', '$2a$12$cIA61WV4iZX4M7fI3Ux3POnF4Nfm0.lE3ia0RISAhUss6KGcbVGGm', 'ROLE_DONO_RESTAURANTE', 1, true, NOW()),
-    ('Maria zée', 'mariazee@maria.com', '$2a$12$cIA61WV4iZX4M7fI3Ux3POnF4Nfm0.lE3ia0RISAhUss6KGcbVGGm', 'ROLE_DONO_RESTAURANTE', 1, true, NOW()),
-    ('zeca', 'zeca@maria.com', '$2a$12$cIA61WV4iZX4M7fI3Ux3POnF4Nfm0.lE3ia0RISAhUss6KGcbVGGm', 'ROLE_DONO_RESTAURANTE', 2, true, NOW());
+    ('João Zé', 'JoaoZe@gmail.com', '$2a$12$7q2TqMuKrcy7gf5IRh3Y5eMawlGD8KxE0Gq9gEV0to0vZpvooalAO', 'ROLE_DONO_RESTAURANTE', 1, true, NOW()),
+    ('Maria zée', 'mariazee@maria.com', '$2a$12$7q2TqMuKrcy7gf5IRh3Y5eMawlGD8KxE0Gq9gEV0to0vZpvooalAO', 'ROLE_DONO_RESTAURANTE', 1, true, NOW()),
+    ('zeca', 'zeca@maria.com', '$2a$12$7q2TqMuKrcy7gf5IRh3Y5eMawlGD8KxE0Gq9gEV0to0vZpvooalAO', 'ROLE_DONO_RESTAURANTE', 2, true, NOW());
 
 -- 3. Ajuste das sequences para evitar erros em novos cadastros
 SELECT setval(pg_get_serial_sequence('usuario', 'id'), (SELECT COALESCE(MAX(id), 1) FROM usuario));

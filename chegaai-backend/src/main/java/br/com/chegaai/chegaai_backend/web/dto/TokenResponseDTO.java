@@ -1,4 +1,4 @@
-package br.com.chegaai.chegaai_backend.web.controller.dto;
+package br.com.chegaai.chegaai_backend.web.dto;
 
 public record TokenResponseDTO(
         String token,

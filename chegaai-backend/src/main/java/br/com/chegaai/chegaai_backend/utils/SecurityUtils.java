@@ -25,6 +25,11 @@ public class SecurityUtils {
         if (usuarioLogado.getRestaurante() != null) {
             return usuarioLogado.getRestaurante().getId();
         }
+
+        if (usuarioLogado.getRestaurante().getId() == null || usuarioLogado.getPapel() == Papel.ROLE_GLOBAL_ADMIN) {
+            return null;
+        }
+
             return null;
     }
 

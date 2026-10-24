@@ -4,7 +4,7 @@
  * A cópia, distribuição ou uso não autorizado é estritamente proibido.
  */
 
-package br.com.chegaai.chegaai_backend.web.controller.dto;
+package br.com.chegaai.chegaai_backend.web.dto;
 
 public class AdminCriarRestauranteDTO {
 }
